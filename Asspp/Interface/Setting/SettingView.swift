@@ -51,7 +51,21 @@ struct SettingView: View {
                     #if canImport(UIKit)
                         .textInputAutocapitalization(.never)
                     #endif
-                    HStack {
+                    #if os(macOS)
+                        HStack {
+                            Button("Save") {
+                                let trimmed = deviceIdDraft.trimmingCharacters(in: .whitespacesAndNewlines)
+                                guard !trimmed.isEmpty else { return }
+                                vm.deviceIdentifier = trimmed
+                                ApplePackage.Configuration.deviceIdentifier = trimmed
+                                editingDeviceId = false
+                            }
+                            Button("Cancel", role: .destructive) {
+                                editingDeviceId = false
+                            }
+                            Spacer()
+                        }
+                    #else
                         Button("Save") {
                             let trimmed = deviceIdDraft.trimmingCharacters(in: .whitespacesAndNewlines)
                             guard !trimmed.isEmpty else { return }
@@ -62,31 +76,30 @@ struct SettingView: View {
                         Button("Cancel", role: .destructive) {
                             editingDeviceId = false
                         }
-                        Spacer()
-                    }
+                    #endif
                 } else {
                     Text(vm.deviceIdentifier)
                         .font(.system(.body, design: .monospaced))
                         .textSelection(.enabled)
                         .redacted(reason: .placeholder, isEnabled: vm.demoMode)
-                    HStack {
-                        #if canImport(UIKit)
-                            Button("Open Settings") {
-                                openURL(URL(string: UIApplication.openSettingsURLString)!)
-                            }
-                            Button("Install Certificate") {
-                                openURL(Installer.caURL)
-                            }
-                        #else
+                    #if os(macOS)
+                        HStack {
                             Button("Open Settings") {
                                 openURL(URL(string: "x-apple.systempreferences:")!)
                             }
                             Button("Show Certificate in Finder") {
                                 NSWorkspace.shared.activateFileViewerSelecting([Installer.ca])
                             }
-                        #endif
-                        Spacer()
-                    }
+                            Spacer()
+                        }
+                    #else
+                        Button("Open Settings") {
+                            openURL(URL(string: UIApplication.openSettingsURLString)!)
+                        }
+                        Button("Install Certificate") {
+                            openURL(Installer.caURL)
+                        }
+                    #endif
                 }
             } header: {
                 Text("Device")
