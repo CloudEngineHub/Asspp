@@ -54,7 +54,7 @@ struct ProductView: View {
     }
 
     var body: some View {
-        FormOnTahoeList {
+        Form {
             accountSelector
             buttons
             packageHeader
@@ -72,6 +72,7 @@ struct ProductView: View {
             }
             pricing
         }
+        .formStyle(.grouped)
         .onAppear {
             selection = eligibleAccounts.first?.id ?? .init()
         }

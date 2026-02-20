@@ -11,11 +11,12 @@
 
         var body: some View {
             NavigationStack {
-                FormOnTahoeList {
+                Form {
                     ForEach(vm.devices) {
                         DeviceSection(vm: vm, device: $0)
                     }
                 }
+                .formStyle(.grouped)
                 .disabled(isLoading)
             }
             .toolbar {

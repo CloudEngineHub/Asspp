@@ -38,7 +38,7 @@ struct PackageView: View {
     @State private var downloads = Downloads.this
 
     var body: some View {
-        FormOnTahoeList {
+        Form {
             Section {
                 ArchivePreviewView(archive: archive)
             } header: {
@@ -195,6 +195,7 @@ struct PackageView: View {
                 Text(url.path)
             }
         }
+        .formStyle(.grouped)
         .navigationTitle(pkg.package.software.name)
     }
 }

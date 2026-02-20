@@ -23,7 +23,7 @@ struct AddAccountView: View {
     @State private var error: Error?
 
     var body: some View {
-        FormOnTahoeList {
+        Form {
             Section {
                 TextField("Email (Apple ID)", text: $email)
                 #if os(iOS)
@@ -105,6 +105,7 @@ struct AddAccountView: View {
                 }
             }
         }
+        .formStyle(.grouped)
         .animation(.spring, value: codeRequired)
         #if os(iOS)
             .listStyle(.insetGrouped)

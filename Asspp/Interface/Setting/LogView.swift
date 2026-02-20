@@ -28,6 +28,7 @@ struct LogView: View {
                             .textSelection(.enabled)
                     }
                 }
+                .formStyle(.grouped)
                 .listStyle(.plain)
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
@@ -62,6 +63,8 @@ struct LogView: View {
                 }
             }
         }
+        .transition(.opacity)
+        .animation(.spring, value: unlocked)
         .navigationTitle("Logs")
     }
 }

@@ -18,13 +18,29 @@ struct DownloadView: View {
     }
 
     private var content: some View {
-        FormOnTahoeList {
+        Group {
             if vm.manifests.isEmpty {
-                Text("No downloads yet.")
+                ContentUnavailableView(
+                    label: {
+                        Label("No Downloads", systemImage: "arrow.down.circle")
+                    },
+                    description: {
+                        Text("Search for an app or add a download link to get started.")
+                    },
+                    actions: {
+                        NavigationLink("Add Download") {
+                            AddDownloadView()
+                        }
+                    },
+                )
+                .padding()
             } else {
-                packageList
+                Form {
+                    packageList
+                }
             }
         }
+        .formStyle(.grouped)
         .navigationDestination(for: PackageManifest.self) { manifest in
             PackageView(pkg: manifest)
         }

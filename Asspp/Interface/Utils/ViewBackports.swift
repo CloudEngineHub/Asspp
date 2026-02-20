@@ -71,36 +71,11 @@ extension View {
 
 public extension ToolbarContent {
     @ToolbarContentBuilder
-    @available(iOS 16.0, macOS 13.0, *)
     nonisolated func hideSharedBackground() -> some ToolbarContent {
         if #available(iOS 26.0, macOS 26.0, *) {
             sharedBackgroundVisibility(.hidden)
         } else {
             self
         }
-    }
-}
-
-struct FormOnTahoeList<Content: View>: View {
-    @ViewBuilder let content: Content
-
-    var body: some View {
-        #if os(macOS) && compiler(>=6.2)
-            if #available(macOS 26.0, *) {
-                Form {
-                    content
-                }
-                .formStyle(.grouped)
-            } else {
-                List {
-                    content
-                }
-                // footers on Sequoia looks weird ...
-            }
-        #else
-            List {
-                content
-            }
-        #endif
     }
 }

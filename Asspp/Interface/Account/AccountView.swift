@@ -119,25 +119,7 @@ struct AccountView: View {
     #if !os(macOS)
         private var iOSBody: some View {
             NavigationStack(path: $navigationPath) {
-                List {
-                    Section {
-                        ForEach(vm.accounts) { account in
-                            NavigationLink(value: account.id) {
-                                HStack {
-                                    Text(account.account.email)
-                                        .redacted(reason: .placeholder, isEnabled: vm.demoMode)
-                                    Spacer()
-                                }
-                                .badge(ApplePackage.Configuration.countryCode(for: account.account.store) ?? account.account.store)
-                            }
-                        }
-                    } header: {
-                        Text("Apple IDs")
-                    } footer: {
-                        Text("Your accounts are saved in your Keychain and will be synced across devices with the same iCloud account signed in.")
-                    }
-                }
-                .overlay {
+                Group {
                     if vm.accounts.isEmpty {
                         ContentUnavailableView(
                             label: {
@@ -150,6 +132,26 @@ struct AccountView: View {
                                 Button("Add Account") { addAccount.toggle() }
                             },
                         )
+                    } else {
+                        Form {
+                            Section {
+                                ForEach(vm.accounts) { account in
+                                    NavigationLink(value: account.id) {
+                                        HStack {
+                                            Text(account.account.email)
+                                                .redacted(reason: .placeholder, isEnabled: vm.demoMode)
+                                            Spacer()
+                                        }
+                                        .badge(ApplePackage.Configuration.countryCode(for: account.account.store) ?? account.account.store)
+                                    }
+                                }
+                            } header: {
+                                Text("Apple IDs")
+                            } footer: {
+                                Text("Your accounts are saved in your Keychain and will be synced across devices with the same iCloud account signed in.")
+                            }
+                        }
+                        .formStyle(.grouped)
                     }
                 }
                 .navigationDestination(for: AppStore.UserAccount.ID.self) { id in

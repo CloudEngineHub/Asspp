@@ -29,7 +29,7 @@ struct SettingView: View {
     }
 
     private var formContent: some View {
-        FormOnTahoeList {
+        Form {
             Section {
                 Toggle("Demo Mode", isOn: $vm.demoMode)
                 Button("Delete All Downloads", role: .destructive) {
@@ -133,6 +133,7 @@ struct SettingView: View {
                 Text("This will reset all your settings.")
             }
         }
+        .formStyle(.grouped)
         .navigationTitle("Settings")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {

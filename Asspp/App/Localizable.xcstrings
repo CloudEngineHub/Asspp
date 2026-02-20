@@ -354,6 +354,22 @@
         }
       }
     },
+    "Add Download" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Download"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加下载"
+          }
+        }
+      }
+    },
     "All Regions" : {
       "localizations" : {
         "en" : {
@@ -1625,7 +1641,24 @@
         }
       }
     },
+    "No Downloads" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Downloads"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无下载"
+          }
+        }
+      }
+    },
     "No downloads yet." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2137,6 +2170,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "搜索 - %@"
+          }
+        }
+      }
+    },
+    "Search for an app or add a download link to get started." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for an app or add a download link to get started."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索应用或添加下载链接以开始。"
           }
         }
       }

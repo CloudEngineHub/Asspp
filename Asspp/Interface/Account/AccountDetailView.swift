@@ -22,7 +22,7 @@ struct AccountDetailView: View {
     @State private var rotatingHint = ""
 
     var body: some View {
-        FormOnTahoeList {
+        Form {
             Section {
                 Button { copyToClipboard(account?.account.email) } label: {
                     Text(account?.account.email ?? "")
@@ -90,6 +90,7 @@ struct AccountDetailView: View {
                 .foregroundStyle(.red)
             }
         }
+        .formStyle(.grouped)
         .navigationTitle("Account Details")
     }
 }

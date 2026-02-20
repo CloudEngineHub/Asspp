@@ -125,7 +125,7 @@ struct SearchView: View {
     }
 
     var content: some View {
-        FormOnTahoeList {
+        Form {
             if searching || !searchResult.isEmpty {
                 Section(searching ? "Searching..." : "\(searchResult.count) Results") {
                     ForEach(searchResult) { item in
@@ -138,6 +138,7 @@ struct SearchView: View {
                 .transition(.opacity)
             }
         }
+        .formStyle(.grouped)
         .navigationDestination(for: ProductDestination.self) { dest in
             ProductView(archive: dest.archive, region: dest.region, navigationPath: $navigationPath)
         }
